@@ -84,4 +84,51 @@ const getDataFromDB = async() => {
     console.log(result);
 };
 
-// getDataFromDB();
+// in operator
+const getDataFromDbIN = async() => {
+    const result = await EmpDetails.find({
+        empAddress: { $in: ["Mumbai", "Solapur"] },
+    });
+    console.log(result);
+};
+
+// not in
+const getDataFromDbNotIN = async() => {
+    const result = await EmpDetails.find({
+        empAddress: { $nin: ["Mumbai", "Solapur"] },
+    });
+    console.log(result);
+};
+
+const getDataFromDbOR = async() => {
+    const result = await EmpDetails.find({
+        $or: [{ empAddress: "Solapur" }, { empAddress: "Pune" }],
+    });
+    console.log(result);
+};
+
+const getDataFromDbAND = async() => {
+    const result = await EmpDetails.find({
+        $and: [{ empAddress: "Solapur" }, { empAge: 19 }],
+    });
+    console.log(result);
+};
+
+const getDataFromDbNOR = async() => {
+    const result = await EmpDetails.find({
+        $nor: [{ empAddress: "Pune" }, { empAge: 19 }],
+    });
+    console.log(result);
+};
+
+const getDataFromDbNOT = async() => {
+    const result = await EmpDetails.find({ id: { $not: { $lte: 2 } } });
+    console.log(result);
+};
+
+const getDataFromDbSORT = async() => {
+    const result = await EmpDetails.find().sort({ id: -1 });
+    console.log(result);
+};
+
+getDataFromDbSORT();
