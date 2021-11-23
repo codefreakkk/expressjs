@@ -33,6 +33,7 @@ const empSchema = new mongoose.Schema({
     id: {
         type: Number,
         required: true,
+        unique: true,
     },
     empName: String,
     empAge: Number,
@@ -59,7 +60,7 @@ const createDocument = async() => {
     });
 
     const data2 = new EmpDetails({
-        id: 4,
+        id: 3,
         empName: "Prachi Sachin Said",
         empAge: 18,
         empAddress: "Solapur",
@@ -75,7 +76,7 @@ const createDocument = async() => {
     console.log(result);
 };
 
-// createDocument();
+createDocument();
 
 // read document
 
@@ -131,4 +132,34 @@ const getDataFromDbSORT = async() => {
     console.log(result);
 };
 
-getDataFromDbSORT();
+// getDataFromDbSORT();
+
+// Update document
+
+const updateData = async(id) => {
+    try {
+        const result = await EmpDetails.updateOne({ id }, {
+            $set: {
+                empAge: 20,
+            },
+        });
+        console.log(result);
+    } catch (err) {
+        console.log(err);
+    }
+};
+
+// updateData(3);
+
+// delete documents
+
+const deleteDocument = async(id) => {
+    try {
+        const result = await EmpDetails.deleteOne({ id });
+        console.log(result);
+    } catch (err) {
+        console.log(err);
+    }
+};
+
+// deleteDocument(4);
